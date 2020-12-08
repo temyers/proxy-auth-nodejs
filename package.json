@@ -1,0 +1,19 @@
+{
+  "name": "proxy-spike",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/**/*.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.805.0",
+    "chai": "^4.2.0",
+    "got": "^11.8.0",
+    "mocha": "^8.2.1",
+    "proxy-agent": "^4.0.0",
+    "tunnel": "0.0.6"
+  }
+}

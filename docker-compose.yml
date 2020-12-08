@@ -1,0 +1,50 @@
+version: "3"
+services:
+  proxy:
+      image: sameersbn/squid
+      volumes:
+        - ./squid/squid.conf:/etc/squid/squid.conf
+        - ./squid/cache:/usr/local/var/cache/squid
+      ports:
+        - 3128:3128
+      networks:
+      - internet
+      - no-internet
+  dev-env:
+      image: node:12-alpine
+      volumes:
+        - ./:/src
+      entrypoint: 'sh'
+      networks:
+      - no-internet
+      working_dir: '/src'
+      environment:
+        - AWS_ACCESS_KEY_ID
+        - AWS_SECRET_ACCESS_KEY
+      dns:
+        172.24.0.3
+  nameserver:
+      image: jpillora/dnsmasq
+      volumes:
+        - ./nameserver/dnsmasq.conf:/etc/dnsmasq.conf
+      logging:
+        options:
+          max-size: "1m"
+      networks:
+        no-internet:
+          ipv4_address: '172.24.0.3'
+        internet:
+          ipv4_address: '172.23.0.3'
+
+networks:
+  no-internet:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: "172.24.0.0/24"
+  internet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.23.0.0/24"
