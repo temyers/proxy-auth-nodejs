@@ -5,6 +5,7 @@ services:
       volumes:
         - ./squid/squid.conf:/etc/squid/squid.conf
         - ./squid/cache:/usr/local/var/cache/squid
+        - ./squid/passwords:/etc/squid3/passwords
       ports:
         - 3128:3128
       networks:
