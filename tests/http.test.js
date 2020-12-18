@@ -83,7 +83,7 @@ describe("HTTP NodeJS connectivity", function () {
           }),
         },
       });
-      return Proise.resolve();
+      return Promise.resolve();
     } catch (err) {
       expect(err.toString()).to.contain("407 (Proxy Authentication Required)");
       return Promise.resolve();
@@ -110,10 +110,11 @@ describe("HTTP NodeJS connectivity", function () {
               port: 3128,
               protocol: "http",
               keepAlive: true,
+              auth: `${username}:${password}`,
             }),
           },
         });
-        return Proise.resolve();
+        return Promise.resolve();
       } catch (err) {
         expect(err.toString()).to.contain(
           "407 (Proxy Authentication Required)"
