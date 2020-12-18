@@ -23,7 +23,7 @@ services:
         - AWS_ACCESS_KEY_ID
         - AWS_SECRET_ACCESS_KEY
       dns:
-        172.24.0.3
+        172.24.0.4
   nameserver:
       image: jpillora/dnsmasq
       volumes:
@@ -33,9 +33,9 @@ services:
           max-size: "1m"
       networks:
         no-internet:
-          ipv4_address: '172.24.0.3'
+          ipv4_address: '172.24.0.4'
         internet:
-          ipv4_address: '172.23.0.3'
+          ipv4_address: '172.23.0.4'
 
 networks:
   no-internet:
